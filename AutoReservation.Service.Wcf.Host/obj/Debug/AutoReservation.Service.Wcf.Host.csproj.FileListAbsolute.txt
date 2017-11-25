@@ -1,0 +1,2 @@
+C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Service.Wcf.Host\obj\Debug\AutoReservation.Service.Wcf.Host.csprojResolveAssemblyReference.cache
+C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Service.Wcf.Host\obj\Debug\AutoReservation.Service.Wcf.Host.csproj.CoreCompileInputs.cache

@@ -1,0 +1,2 @@
+C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.TestEnvironment\obj\Debug\AutoReservation.TestEnvironment.csprojResolveAssemblyReference.cache
+C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.TestEnvironment\obj\Debug\AutoReservation.TestEnvironment.csproj.CoreCompileInputs.cache
