@@ -8,5 +8,7 @@ C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJE
 C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.csproj.CoreCompileInputs.cache
 C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.dll
 C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.pdb
-C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\bin\Debug\AutoReservation.Dal.dll.CodeAnalysisLog.xml
-C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\bin\Debug\AutoReservation.Dal.dll.lastcodeanalysissucceeded
+C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.csprojResolveAssemblyReference.cache
+C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.Migrations.initSetup.resources
+C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.csproj.GenerateResource.Cache
+C:\Users\felix\Documents\Unterricht-HSR\SEM_5\dotNet-Technologie\MsTe\MINI-PROJEKT\fel-code\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.Migrations.newTableName.resources
