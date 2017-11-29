@@ -7,8 +7,8 @@ namespace AutoReservation.Dal.Entities
     [Table("Reservation")]
     public class Reservation
     {
-        [Key]
-        public int Id { get; set; }
+        [Key, Column("Id")]
+        public int ReservationsNr { get; set; }
 
         public int AutoId { get; set; }
 
@@ -16,7 +16,6 @@ namespace AutoReservation.Dal.Entities
 
         public int KundeId { get; set; }
 
-        public int ReservationsNr { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

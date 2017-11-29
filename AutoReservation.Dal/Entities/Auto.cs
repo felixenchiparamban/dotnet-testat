@@ -11,7 +11,7 @@ namespace AutoReservation.Dal.Entities
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(20), Required]
         public string Marke { get; set; }
 
         [Timestamp]

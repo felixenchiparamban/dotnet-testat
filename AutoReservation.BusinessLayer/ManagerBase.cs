@@ -1,5 +1,6 @@
 ﻿using AutoReservation.BusinessLayer.Exceptions;
 using AutoReservation.Dal;
+using AutoReservation.Dal.Entities;
 
 namespace AutoReservation.BusinessLayer
 {

@@ -12,4 +12,14 @@ namespace AutoReservation.BusinessLayer.Exceptions
 
         public T MergedEntity { get; set; }
     }
+
+    public class InvalidDateRangeException : Exception
+    {
+        public InvalidDateRangeException(string message) : base(message) { }
+    }
+
+    public class AutoUnavailableException : Exception
+    {
+        public AutoUnavailableException(string message) : base(message) { }
+    }
 }

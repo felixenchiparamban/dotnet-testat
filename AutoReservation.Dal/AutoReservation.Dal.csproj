@@ -77,14 +77,6 @@
     </Compile>
     <Compile Include="AutoReservationContext.cs" />
     <Compile Include="Entities\Kunde.cs" />
-    <Compile Include="Migrations\201711251510196_initSetup.cs" />
-    <Compile Include="Migrations\201711251510196_initSetup.Designer.cs">
-      <DependentUpon>201711251510196_initSetup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711251518193_newTableName.cs" />
-    <Compile Include="Migrations\201711251518193_newTableName.Designer.cs">
-      <DependentUpon>201711251518193_newTableName.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Reservation.cs" />
@@ -101,14 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711251510196_initSetup.resx">
-      <DependentUpon>201711251510196_initSetup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711251518193_newTableName.resx">
-      <DependentUpon>201711251518193_newTableName.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
