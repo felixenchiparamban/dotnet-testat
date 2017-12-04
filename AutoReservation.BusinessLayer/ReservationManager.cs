@@ -78,13 +78,38 @@ namespace AutoReservation.BusinessLayer
         {
             if ((reservation.Bis - reservation.Von).TotalHours < 24)
             {
-                throw new InvalidDateRangeException("reservation error in ReservationManager");
+                throw new InvalidDateRangeException("reservation error in checkDateRange");
             }
         }
 
-        private void AvailabilityCheck(AutoReservationContext context, Reservation reservation)
+        private void AvailabilityCheck(AutoReservationContext context, Reservation newReservation)
         {
-            
+            if (!(context.Reservationen.Any(r => r.AutoId == newReservation.AutoId)))
+            {
+                throw new AutoUnavailableException("reservation error in AvailabilityCheck");
+            }
+
+            List<Reservation> reserv = context.Reservationen.Where(re => re.AutoId == newReservation.AutoId).ToList();
+
+            foreach(Reservation oldReservation in reserv)
+            {
+                if(oldReservation.Von == newReservation.Von && oldReservation.Bis == newReservation.Bis)
+                {
+                    throw new AutoUnavailableException("reservation error in AvailabilityCheck");
+                }
+                if(oldReservation.Von < newReservation.Von && oldReservation.Bis > newReservation.Bis)
+                {
+                    throw new AutoUnavailableException("reservation error in AvailabilityCheck");
+                }
+                if(oldReservation.Von > newReservation.Von && oldReservation.Bis < newReservation.Bis)
+                {
+                    throw new AutoUnavailableException("reservation error in AvailabilityCheck");
+                }
+                if(newReservation.Von < oldReservation.Bis)
+                {
+                    throw new AutoUnavailableException("reservation error in AvailabilityCheck");
+                }
+            }
         }
 
         public void AvailabilityCheck(Reservation reservation)

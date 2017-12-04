@@ -38,22 +38,17 @@ namespace AutoReservation.BusinessLayer
         //Eine Entity anhand des Primaerschluessels lesen
         public Auto GetAutoById(int id)
         {
-            var result = from l in List
-                         where l.Id == id
-                         select l;
-            return result as Auto;
+            using(var context = new AutoReservationContext())
+            {
+                return context.Autos.SingleOrDefault(a => a.Id == id);
+            }
         }
 
         // Einfuegen
         public void InsertAuto(Auto auto)
         {
-            // Wieso funktioniet die folgende Code hiern icht?
-            //List.Add(auto);
-            //List.saveChanges();
             using (var context = new AutoReservationContext())
             {
-                // Unterschied zwischen dem nachfolgenden codes?
-                //context.Autos.Add(auto);
                 context.Entry(auto).State = EntityState.Added;
                 context.SaveChanges();
             }

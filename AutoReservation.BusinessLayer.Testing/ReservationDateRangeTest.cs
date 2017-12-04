@@ -20,7 +20,6 @@ namespace AutoReservation.BusinessLayer.Testing
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidDateRangeException))]
         public void ScenarioOkay01Test()
         {
             var reservation = new Reservation
@@ -32,6 +31,7 @@ namespace AutoReservation.BusinessLayer.Testing
             try
             {
                 Target.CheckDateRange(reservation);
+
             }
             catch (Exception)
             {
@@ -41,6 +41,7 @@ namespace AutoReservation.BusinessLayer.Testing
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidDateRangeException))]
         public void ScenarioOkay02Test()
         {
             Assert.Inconclusive("Test not implemented.");

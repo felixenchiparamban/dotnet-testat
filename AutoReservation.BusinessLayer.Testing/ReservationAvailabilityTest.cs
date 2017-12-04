@@ -28,6 +28,9 @@ namespace AutoReservation.BusinessLayer.Testing
         public void ScenarioOkay02Test()
         {
             Assert.Inconclusive("Test not implemented.");
+            // |----|
+            //  |-|
+
         }
         
         [TestMethod]

@@ -26,10 +26,10 @@ namespace AutoReservation.BusinessLayer
         //Eine Entity anhand des Primaerschluessels lesen
         public Kunde GetKundeById(int id)
         {
-            var result = from l in List
-                         where l.Id == id
-                         select l;
-            return result as Kunde;
+            using(var context = new AutoReservationContext())
+            {
+                return context.Kunden.SingleOrDefault(k => k.Id == id);
+            }
         }
 
         // Einfuegen
