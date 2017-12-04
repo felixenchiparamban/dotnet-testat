@@ -1,4 +1,5 @@
-﻿using AutoReservation.Dal.Entities;
+﻿using AutoReservation.BusinessLayer.Exceptions;
+using AutoReservation.Dal.Entities;
 using AutoReservation.TestEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -21,10 +22,26 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void ScenarioOkay01Test()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var reservation = new Reservation
+            {
+                Bis = new DateTime().AddHours(35),
+                Von = new DateTime()
+            };
+
+            try
+            {
+                Target.CheckDateRange(reservation);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidDateRangeException))]
         public void ScenarioOkay02Test()
         {
             Assert.Inconclusive("Test not implemented.");

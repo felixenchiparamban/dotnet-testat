@@ -45,7 +45,9 @@ namespace AutoReservation.Dal
             //      Remarks:
             //      This could not be done using attributes on business entities
             //      since the discriminator (AutoKlasse) must not be part of the entity.
-
+            modelBuilder.Entity<Auto>().Map<LuxusklasseAuto>(m => m.Requires("AutoKlasse").HasValue(0));
+            modelBuilder.Entity<Auto>().Map<MittelklasseAuto>(m => m.Requires("AutoKlasse").HasValue(1));
+            modelBuilder.Entity<Auto>().Map<StandardAuto>(m => m.Requires("AutoKlasse").HasValue(2));
         }
     }
 }
