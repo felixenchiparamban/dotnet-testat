@@ -21,7 +21,9 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void UpdateAutoTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var autoUpdate = Target.GetAutoById(1);
+            autoUpdate.Marke = "TATA";
+            Assert.IsTrue(Target.UpdateAuto(autoUpdate));
         }
     }
 }

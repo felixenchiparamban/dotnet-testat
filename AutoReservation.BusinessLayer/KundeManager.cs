@@ -43,7 +43,7 @@ namespace AutoReservation.BusinessLayer
         }
 
         // Update
-        public void UpdateKunde(Kunde kunde)
+        public bool UpdateKunde(Kunde kunde)
         {
             using(var context = new AutoReservationContext())
             {
@@ -51,6 +51,7 @@ namespace AutoReservation.BusinessLayer
                 {
                     context.Entry(kunde).State = EntityState.Modified;
                     context.SaveChanges();
+                    return true;
                 }
                 catch(DbUpdateConcurrencyException)
                 {

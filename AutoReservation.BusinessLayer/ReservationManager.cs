@@ -34,7 +34,7 @@ namespace AutoReservation.BusinessLayer
         }
 
         // Einfuegen
-        public void InsertReservation(Reservation reservation)
+        public Reservation InsertReservation(Reservation reservation)
         {
             using(var context = new AutoReservationContext())
             {
@@ -42,11 +42,12 @@ namespace AutoReservation.BusinessLayer
                 AvailabilityCheck(context, reservation);
                 context.Entry(reservation).State = EntityState.Added;
                 context.SaveChanges();
+                return reservation; 
             }
         }
 
         // Update
-        public void UpdateReservation(Reservation reservation)
+        public bool UpdateReservation(Reservation reservation)
         {
             using(var context = new AutoReservationContext())
             {
@@ -56,6 +57,7 @@ namespace AutoReservation.BusinessLayer
                     AvailabilityCheck(context, reservation);
                     context.Entry(reservation).State = EntityState.Modified;
                     context.SaveChanges();
+                    return true;
                 }
                 catch(DbUpdateConcurrencyException)
                 {
@@ -74,47 +76,43 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public void CheckDateRange(Reservation reservation)
+        public bool CheckDateRange(Reservation reservation)
         {
             if ((reservation.Bis - reservation.Von).TotalHours < 24)
             {
                 throw new InvalidDateRangeException("reservation error in checkDateRange");
             }
+            return true;
         }
 
-        private void AvailabilityCheck(AutoReservationContext context, Reservation newReservation)
+        private bool AvailabilityCheck(AutoReservationContext context, Reservation reservationA)
         {
-            if (!(context.Reservationen.Any(r => r.AutoId == newReservation.AutoId)))
+            if (!(context.Reservationen.Any(r => r.AutoId == reservationA.AutoId)))
             {
                 throw new AutoUnavailableException("reservation error in AvailabilityCheck");
             }
 
-            List<Reservation> reserv = context.Reservationen.Where(re => re.AutoId == newReservation.AutoId).ToList();
+            List<Reservation> reserv = context.Reservationen
+                .AsNoTracking()
+                .Where(re => re.AutoId == reservationA.AutoId)
+                .ToList();
 
-            foreach(Reservation oldReservation in reserv)
+            foreach(Reservation reservationB in reserv)
             {
-                if(oldReservation.Von == newReservation.Von && oldReservation.Bis == newReservation.Bis)
-                {
-                    throw new AutoUnavailableException("reservation error in AvailabilityCheck");
-                }
-                if(oldReservation.Von < newReservation.Von && oldReservation.Bis > newReservation.Bis)
-                {
-                    throw new AutoUnavailableException("reservation error in AvailabilityCheck");
-                }
-                if(oldReservation.Von > newReservation.Von && oldReservation.Bis < newReservation.Bis)
-                {
-                    throw new AutoUnavailableException("reservation error in AvailabilityCheck");
-                }
-                if(newReservation.Von < oldReservation.Bis)
+                if(!(reservationA.Bis <= reservationB.Von || reservationA.Von >= reservationB.Bis))
                 {
                     throw new AutoUnavailableException("reservation error in AvailabilityCheck");
                 }
             }
+            return true;
         }
 
-        public void AvailabilityCheck(Reservation reservation)
+        public bool AvailabilityCheck(Reservation reservation)
         {
-
+            using(var context = new AutoReservationContext())
+            {
+                return AvailabilityCheck(context, reservation);
+            }
         }
     }
 }
