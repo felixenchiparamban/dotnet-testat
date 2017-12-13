@@ -122,7 +122,7 @@ namespace AutoReservation.Service.Wcf
             }
             catch (OptimisticConcurrencyException<Auto> ex)
             {
-                throw new FaultException<Auto>(ex.MergedEntity);
+                throw new FaultException<AutoDto>(ex.MergedEntity.ConvertToDto());
             }
             return true;
         }
@@ -136,7 +136,7 @@ namespace AutoReservation.Service.Wcf
             }
             catch (OptimisticConcurrencyException<Kunde> ex)
             {
-                throw new FaultException<Kunde>(ex.MergedEntity);
+                throw new FaultException<KundeDto>(ex.MergedEntity.ConvertToDto());
             }
             return true;
         }
@@ -150,15 +150,15 @@ namespace AutoReservation.Service.Wcf
             }
             catch (OptimisticConcurrencyException<Reservation> ex)
             {
-                throw new FaultException<Reservation>(ex.MergedEntity);
+                throw new FaultException<ReservationDto>(ex.MergedEntity.ConvertToDto());
             }
             catch(InvalidDateRangeException ex)
             {
-                throw new FaultException<Reservation>(reservation.ConvertToEntity());
+                throw new FaultException("invalid");
             }
             catch (AutoUnavailableException ex)
             {
-                throw new FaultException<Reservation>(reservation.ConvertToEntity());
+                throw new FaultException("AutoUnvaili");
             }
             return true;
         }

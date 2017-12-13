@@ -19,7 +19,10 @@ namespace AutoReservation.BusinessLayer
             {
                 using(var context = new AutoReservationContext())
                 {
-                    return context.Reservationen.ToList();
+                    return context.Reservationen
+                        .Include(r => r.Auto)
+                        .Include(k => k.Kunde)
+                        .ToList();
                 }
             }
         }
@@ -29,7 +32,10 @@ namespace AutoReservation.BusinessLayer
         {
             using(var context = new AutoReservationContext())
             {
-                return context.Reservationen.SingleOrDefault(r => r.ReservationsNr == id);
+                return context.Reservationen
+                    .Include(r => r.Auto)
+                    .Include(k => k.Kunde)
+                    .SingleOrDefault(r => r.ReservationsNr == id);
             }
         }
 

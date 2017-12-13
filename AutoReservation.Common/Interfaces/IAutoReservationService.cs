@@ -39,12 +39,15 @@ namespace AutoReservation.Common.Interfaces
 
         // Update
         [OperationContract]
+        [FaultContract(typeof(AutoDto))]
         bool UpdateAuto(AutoDto auto);
 
         [OperationContract]
+        [FaultContract(typeof(KundeDto))]
         bool UpdateKunde(KundeDto kunde);
 
         [OperationContract]
+        [FaultContract(typeof(ReservationDto))]
         bool UpdateReservation(ReservationDto reservation);
 
         // Löschen

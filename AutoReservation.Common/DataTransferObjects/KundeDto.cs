@@ -24,7 +24,7 @@ namespace AutoReservation.Common.DataTransferObjects
             get { return id; }
             set
             {
-                Id = value;
+                id = value;
             }
         }
         private string nachname;
