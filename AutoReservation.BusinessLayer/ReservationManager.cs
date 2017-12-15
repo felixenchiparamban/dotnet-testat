@@ -84,7 +84,7 @@ namespace AutoReservation.BusinessLayer
 
         public bool CheckDateRange(Reservation reservation)
         {
-            if ((reservation.Bis - reservation.Von).TotalHours < 24)
+            if (reservation.Bis < reservation.Von || (reservation.Bis - reservation.Von).TotalHours < 24)
             {
                 throw new InvalidDateRangeException("reservation error in checkDateRange");
             }
@@ -93,10 +93,10 @@ namespace AutoReservation.BusinessLayer
 
         private bool AvailabilityCheck(AutoReservationContext context, Reservation reservationA)
         {
-            if (!(context.Reservationen.Any(r => r.AutoId == reservationA.AutoId)))
-            {
-                throw new AutoUnavailableException("reservation error in AvailabilityCheck");
-            }
+            //if (!(context.Reservationen.Any(r => r.AutoId == reservationA.AutoId)))
+            //{
+            //    throw new AutoUnavailableException("reservation error in AvailabilityCheck");
+            //}
 
             List<Reservation> reserv = context.Reservationen
                 .AsNoTracking()
@@ -115,9 +115,22 @@ namespace AutoReservation.BusinessLayer
 
         public bool AvailabilityCheck(Reservation reservation)
         {
-            using(var context = new AutoReservationContext())
+            using (var context = new AutoReservationContext())
             {
                 return AvailabilityCheck(context, reservation);
+            }
+        }
+
+        public bool AvailabilityCheck(DateTime from, DateTime to, int autoId, int? reservationNr)
+        {
+            using (var context = new AutoReservationContext())
+            {
+                return AvailabilityCheck(context, new Reservation() {
+                    ReservationsNr = reservationNr ?? -1,
+                    Von = from,
+                    Bis = to,
+                    AutoId = autoId
+                });
             }
         }
     }

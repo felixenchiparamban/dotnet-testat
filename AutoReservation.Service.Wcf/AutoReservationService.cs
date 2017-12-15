@@ -7,6 +7,7 @@ using AutoReservation.BusinessLayer;
 using AutoReservation.Dal.Entities;
 using AutoReservation.BusinessLayer.Exceptions;
 using System.ServiceModel;
+using AutoReservation.Common.DataTransferObjects.Faults;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -100,16 +101,50 @@ namespace AutoReservation.Service.Wcf
         public bool InsertReservation(ReservationDto reservation)
         {
             WriteActualMethod();
-            reservationManager.InsertReservation(reservation.ConvertToEntity());
+            try
+            {
+                reservationManager.InsertReservation(reservation.ConvertToEntity());
+            }
+            catch (InvalidDateRangeException ex)
+            {
+                FaultInvalidDateRange value = new FaultInvalidDateRange
+                {
+                    Operation = ex.Message
+                };
+                throw new FaultException<FaultInvalidDateRange>(value);
+            }
+            catch (AutoUnavailableException ex)
+            {
+                FaultAutoUnavailable value = new FaultAutoUnavailable
+                {
+                    Operation = ex.Message
+                };
+                throw new FaultException<FaultAutoUnavailable>(value);
+            }
+            catch (OptimisticConcurrencyException<ReservationDto> ex)
+            {
+                throw new FaultException<ReservationDto>(ex.MergedEntity);
+            }
+            
             return true;
         }
 
-        public bool IsAutoAvailable(AutoDto auto)
+        public bool IsAutoAvailable(DateTime from, DateTime to, int kundenId, int reservationNr)
         {
             WriteActualMethod();
-
-
-
+            try
+            {
+                reservationManager.AvailabilityCheck(from, to, kundenId, reservationNr);
+            }
+            catch(AutoUnavailableException ex)
+            {
+                FaultAutoUnavailable value = new FaultAutoUnavailable
+                {
+                    Operation = ex.Message
+                };
+            throw new FaultException<FaultAutoUnavailable>(value);
+            }
+            
             return true;
         }
 
@@ -124,6 +159,7 @@ namespace AutoReservation.Service.Wcf
             {
                 throw new FaultException<AutoDto>(ex.MergedEntity.ConvertToDto());
             }
+
             return true;
         }
 
@@ -154,11 +190,21 @@ namespace AutoReservation.Service.Wcf
             }
             catch(InvalidDateRangeException ex)
             {
-                throw new FaultException("invalid");
+                FaultInvalidDateRange value = new FaultInvalidDateRange
+                {
+                    Operation = ex.Message
+                };
+
+                throw new FaultException<FaultInvalidDateRange>(value);
             }
             catch (AutoUnavailableException ex)
             {
-                throw new FaultException("AutoUnvaili");
+                FaultAutoUnavailable value = new FaultAutoUnavailable
+                {
+                    Operation = ex.Message
+                };
+
+                throw new FaultException<FaultAutoUnavailable>(value);
             }
             return true;
         }
