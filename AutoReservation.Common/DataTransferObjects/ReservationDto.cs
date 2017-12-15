@@ -28,9 +28,9 @@ namespace AutoReservation.Common.DataTransferObjects
             }
         }
 
-        private int rowVersion;
+        private byte[] rowVersion;
         [DataMember]
-        public int RowVersion
+        public byte[] RowVersion
         {
             get { return rowVersion; }
             set

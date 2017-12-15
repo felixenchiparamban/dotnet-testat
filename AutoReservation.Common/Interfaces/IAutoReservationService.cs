@@ -1,6 +1,8 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System;
+using AutoReservation.Common.DataTransferObjects.Faults;
 
 namespace AutoReservation.Common.Interfaces
 {
@@ -34,17 +36,25 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         bool InsertKunde(KundeDto kunde);
 
+        [FaultContract(typeof(ReservationDto))]
+        [FaultContract(typeof(FaultInvalidDateRange))]
+        [FaultContract(typeof(FaultAutoUnavailable))]
         [OperationContract]
         bool InsertReservation(ReservationDto reservation);
 
         // Update
         [OperationContract]
+        [FaultContract(typeof(AutoDto))]
         bool UpdateAuto(AutoDto auto);
 
         [OperationContract]
+        [FaultContract(typeof(KundeDto))]
         bool UpdateKunde(KundeDto kunde);
 
         [OperationContract]
+        [FaultContract(typeof(ReservationDto))]
+        [FaultContract(typeof(FaultInvalidDateRange))]
+        [FaultContract(typeof(FaultAutoUnavailable))]
         bool UpdateReservation(ReservationDto reservation);
 
         // Löschen
@@ -58,7 +68,8 @@ namespace AutoReservation.Common.Interfaces
         bool DeleteReservation(ReservationDto reservation);
 
         // Check availability of Auto
+        [FaultContract(typeof(FaultAutoUnavailable))]
         [OperationContract]
-        bool IsAutoAvailable(AutoDto auto);
+        bool IsAutoAvailable(DateTime from, DateTime to, int kundenId, int reservationNr);
     }
 }

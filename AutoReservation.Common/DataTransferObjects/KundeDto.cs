@@ -24,7 +24,7 @@ namespace AutoReservation.Common.DataTransferObjects
             get { return id; }
             set
             {
-                Id = value;
+                id = value;
             }
         }
         private string nachname;
@@ -38,9 +38,9 @@ namespace AutoReservation.Common.DataTransferObjects
             }
         }
 
-        private int rowVersion;
+        private byte[] rowVersion;
         [DataMember]
-        public int RowVersion
+        public byte[] RowVersion
         {
             get { return rowVersion; }
             set
